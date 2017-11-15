@@ -1,5 +1,6 @@
 import * as express from 'express'
 import * as path from 'path'
+import * as bodyParser from 'body-parser'
 
 import router from './server/routes'
 import { error } from './server/templates'
@@ -15,6 +16,8 @@ _app.use(function(req, res, next) {
     "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, pragma, cache-control");
   next();
 });
+
+_app.use(bodyParser.json());
 
 _app.use('/', router)
 
