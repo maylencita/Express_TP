@@ -1,0 +1,5 @@
+node_modules/
+bin/*.js
+bin/*.js.map
+yarn-error.log
+yarn.lock
