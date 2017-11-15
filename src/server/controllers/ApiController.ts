@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
+import { User } from '../models'
+import Store from '../models/store'
 
-// export function registerUser(state: {}, user: User){} //We always pass server state
 // export function createChannel(user: User, contexte: {}, nom: string){} //Crée un chanel sans participants. Vérifier points >= 1
 // export function inviteUser(user: User, contexte: {}, nomChannel: string, upserPseudo: string) {} //Vérifier user is owner ou points >= 2; Ajoute un utilisateur à un channel
 // export function readChannel //Vérifier appartennance 
@@ -13,4 +14,12 @@ import { Response, Request } from "express";
 
 export function ping(request: Request, response: Response){
   response.send({ ping: 'ok'})
+}
+
+export function registerUser(request: Request, response: Response) {
+  response.send(request.body)
+}
+
+export function getChannels(request: Request, response: Response) {
+  response.send(Store.channels())
 }

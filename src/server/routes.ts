@@ -9,4 +9,8 @@ router.get('/', (req, res, next) => {
 })
 router.get('/ping', Api.ping)
 
+router.get('/channels', Api.getChannels)
+
+router.put('/user', Api.registerUser)
+
 export default router
