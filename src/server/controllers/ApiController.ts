@@ -1,8 +1,22 @@
 import { Response, Request } from "express";
-import { User } from '../models'
-import Store from '../models/store'
+import { User, Channel } from '../models'; 
+import store from '../models/store'
 
-// export function createChannel(user: User, contexte: {}, nom: string){} //Crée un chanel sans participants. Vérifier points >= 1
+export function addUser(request: Request, response: Response){
+  const user:User = {pseudo:request.body.pseudo, status: "Deconnecte", points:0};
+  store.addUser(user);
+  response.send(user);
+} 
+export function createChannel(request: Request, response: Response){
+  if(request.body.user.points>=1)
+	{
+		const channel:Channel = {nom:request.body.nom, createur:request.body.user, participants:[request.body.user], messages: []};
+		store.addChannel(channel);
+	}
+  response.send();
+} 
+
+ //Crée un chanel sans participants. Vérifier points >= 1
 // export function inviteUser(user: User, contexte: {}, nomChannel: string, upserPseudo: string) {} //Vérifier user is owner ou points >= 2; Ajoute un utilisateur à un channel
 // export function readChannel //Vérifier appartennance 
 // export function sendQuestion(nomChannel, message) //Vérifier appartennance; if points ==0 then add 1 point to user
@@ -16,10 +30,6 @@ export function ping(request: Request, response: Response){
   response.send({ ping: 'ok'})
 }
 
-export function registerUser(request: Request, response: Response) {
-  response.send(request.body)
-}
-
-export function getChannels(request: Request, response: Response) {
-  response.send(Store.channels())
+export function getChannels(request: Request, response: Response){
+  response.send({ channels: store.state.channels})
 }

@@ -1,25 +1,24 @@
 import { ServerState, User, Channel } from '../models'
 
-const dummyChannels = [
-  {nom: "Toto", owner: "Tata", participants_ids: []}
-]
-
 class Store {
-  state: ServerState = {
-    users: [],
-    channels: dummyChannels,
-    messages: []    
-  }
+ state: ServerState = {
+   users: [],
+   channels: [],
+   messages: []   
+ }
 
-  addUser(user: User){
+ addUser(user: User){
+   this.state = {
+     ...this.state,
+     users: [...this.state.users, user]
+   }
+ }
+
+ addChannel(channel: Channel){
     this.state = {
       ...this.state,
-      users: [...this.state.users, user]
+      channels: [...this.state.channels, channel]
     }
-  }
-
-  channels() {
-    return this.state.channels
   }
 }
 
