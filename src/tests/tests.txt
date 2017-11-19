@@ -1,0 +1,7 @@
+{
+    "user" : {
+        "pseudo": "Marinou",
+        "status": "Connecte",
+        "points": 5
+    }
+}
